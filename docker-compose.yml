@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  db_mysql:
+    image: mysql:5.7.23
+    environment:
+    - MYSQL_ROOT_PASSWORD=root
+    - MYSQL_DATABASE=webstation
+    volumes:
+    - /data/mysql
+    ports:
+    - "3307:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+    - 8181:80
+    links:
+    - "db_mysql:db_mysql"
